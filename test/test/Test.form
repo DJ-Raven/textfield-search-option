@@ -131,9 +131,6 @@
           </SubComponents>
         </Container>
         <Component class="textfield.TextFieldSearchOption" name="txt">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Search Here"/>
-          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKeyReleased"/>
           </Events>
