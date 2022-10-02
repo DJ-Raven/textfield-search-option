@@ -4,9 +4,11 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Cursor;
+import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -29,6 +31,14 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class TextFieldSearchOption extends JTextField {
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
 
     public Color getColorOverlay1() {
         return colorOverlay1;
@@ -57,6 +67,7 @@ public class TextFieldSearchOption extends JTextField {
     private int pressedIndex = -1;
     private Color colorOverlay1 = new Color(40, 170, 240);
     private Color colorOverlay2 = new Color(138, 39, 232);
+    private String hint = "Search...";
 
     public TextFieldSearchOption() {
         setBorder(new EmptyBorder(10, 10, 10, 40));
@@ -230,6 +241,7 @@ public class TextFieldSearchOption extends JTextField {
         super.paint(grphcs);
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        paintHint(g2);
         double x = getWidth() - 35;
         double y = 2;
         x -= (x - 2) * animate;
@@ -247,6 +259,20 @@ public class TextFieldSearchOption extends JTextField {
         shape = area;
         drawItem(g2, x, y, getWidth() - 2, height);
         g2.dispose();
+    }
+
+    private void paintHint(Graphics2D g2) {
+        if (getText().length() == 0) {
+            int h = getHeight();
+            Insets ins = getInsets();
+            FontMetrics fm = g2.getFontMetrics();
+            int c0 = getBackground().getRGB();
+            int c1 = getForeground().getRGB();
+            int m = 0xfefefefe;
+            int c2 = ((c0 & m) >>> 1) + ((c1 & m) >>> 1);
+            g2.setColor(new Color(c2, true));
+            g2.drawString(hint, ins.left, h / 2 + fm.getAscent() / 2 - 2);
+        }
     }
 
     private void drawItem(Graphics2D g2, double x, double y, double width, double height) {
