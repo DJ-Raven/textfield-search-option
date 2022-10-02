@@ -133,6 +133,7 @@ public class TextFieldSearchOption extends JTextField {
         items.add(option);
         if (selectedIndex == -1) {
             selectedIndex = 0;
+            runEvent();
         }
     }
 

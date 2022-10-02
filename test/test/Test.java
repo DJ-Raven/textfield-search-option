@@ -25,7 +25,6 @@ public class Test extends javax.swing.JFrame {
         txt.addOption(new SearchOption("Tel", new ImageIcon(getClass().getResource("/test/tel.png"))));
         txt.addOption(new SearchOption("Email", new ImageIcon(getClass().getResource("/test/email.png"))));
         txt.addOption(new SearchOption("Address", new ImageIcon(getClass().getResource("/test/address.png"))));
-        txt.setSelectedIndex(2);
     }
 
     /**
